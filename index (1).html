@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal 18th Birthday - Rian Bist</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 3D Background layers */
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .particle-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(212, 175, 55, 0.8), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(212, 175, 55, 0.6), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(255, 215, 0, 0.7), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(212, 175, 55, 0.5), transparent),
+                radial-gradient(2px 2px at 90% 60%, rgba(255, 215, 0, 0.8), transparent);
+            background-size: 200% 200%;
+            animation: sparkle-move 15s ease-in-out infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes sparkle-move {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        .invitation-card {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(145deg, #16213e, #0f3460);
+            border-radius: 30px;
+            padding: 0;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        /* 3D border effect */
+        .card-border {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
+            pointer-events: none;
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.2),
+                inset 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Shine effect */
+        .shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.03) 50%,
+                transparent 70%
+            );
+            animation: shine 8s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: translate(-100%, -100%) rotate(45deg); }
+            50% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+
+        /* Header section */
+        .header {
+            text-align: center;
+            padding: 35px 25px 25px;
+            position: relative;
+        }
+
+        .crown {
+            font-size: 55px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.6));
+            animation: crown-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes crown-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.6));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 12px 30px rgba(255, 215, 0, 0.8));
+                transform: scale(1.05);
+            }
+        }
+
+        .royal-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c0 50%, #d4af37 100%);
+            color: #16213e;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .invitation-title {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 
+                0 2px 10px rgba(212, 175, 55, 0.6),
+                0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Photo section */
+        .photo-section {
+            padding: 0 25px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #d4af37;
+            box-shadow: 
+                0 0 30px rgba(212, 175, 55, 0.5),
+                0 8px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(212, 175, 55, 0.2);
+            background: linear-gradient(145deg, #d4af37, #f4e5c0);
+            padding: 4px;
+        }
+
+        .photo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .photo-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.3);
+            pointer-events: none;
+        }
+
+        /* Name section */
+        .name-section {
+            text-align: center;
+            padding: 0 25px 25px;
+        }
+
+        .name-label {
+            font-size: 14px;
+            color: #a8a8a8;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .name-display {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c0 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 10px 0;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
+        }
+
+        .ornament {
+            font-size: 20px;
+            color: #d4af37;
+            margin: 10px 0;
+            letter-spacing: 8px;
+        }
+
+        /* Details section */
+        .details-section {
+            padding: 20px 25px;
+        }
+
+        .detail-item {
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 18px;
+            padding: 18px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .detail-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 30px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .detail-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #d4af37, #f4e5c0);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 
+                0 8px 20px rgba(212, 175, 55, 0.4),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.2),
+                inset 0 3px 6px rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            color: #d4af37;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #e8e8e8;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* CTA section */
+        .cta-section {
+            padding: 0 25px 25px;
+        }
+
+        .royal-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c0 50%, #d4af37 100%);
+            border: none;
+            border-radius: 20px;
+            color: #16213e;
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 
+                0 12px 30px rgba(212, 175, 55, 0.5),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.2),
+                inset 0 3px 8px rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .royal-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .royal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.6),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.2),
+                inset 0 3px 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .royal-button:hover:before {
+            left: 100%;
+        }
+
+        .royal-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 0 25px 30px;
+        }
+
+        .footer-box {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 18px;
+        }
+
+        .footer-text {
+            color: #a8a8a8;
+            font-size: 13px;
+            margin: 6px 0;
+        }
+
+        .footer-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 12px auto;
+        }
+
+        .footer-highlight {
+            color: #d4af37;
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8) rotateX(10deg);
+            width: 90%;
+            max-width: 360px;
+            background: linear-gradient(145deg, #16213e, #0f3460);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+
+        .modal-card.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1) rotateX(0deg);
+            pointer-events: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #d4af37, #f4e5c0);
+            border: none;
+            border-radius: 50%;
+            color: #16213e;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.6));
+            animation: modal-heart 2s ease-in-out infinite;
+        }
+
+        @keyframes modal-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c0 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
+        .modal-ornament {
+            font-size: 22px;
+            color: #d4af37;
+            margin: 15px 0;
+            letter-spacing: 8px;
+        }
+
+        .modal-text {
+            color: #c0c0c0;
+            font-size: 15px;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .modal-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-layer"></div>
+    <div class="particle-layer"></div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="invitation-card">
+        <div class="card-container">
+            <div class="shine"></div>
+            <div class="card-border"></div>
+
+            <!-- Header -->
+            <div class="header">
+                <div class="crown">👑</div>
+                <div class="royal-badge">Royal Invitation</div>
+                <h1 class="invitation-title">Celebrate</h1>
+            </div>
+
+            <!-- Photo Section -->
+            <div class="photo-section">
+                <div class="photo-frame">
+                    <div class="photo-inner">
+                        <img src="image.jpg" alt="Rian Bist">
+                        <div class="photo-glow"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name Section -->
+            <div class="name-section">
+                <p class="name-label">In Honor Of</p>
+                <div class="name-display">RIAN BIST</div>
+                <div class="ornament">◆ ◇ ◆</div>
+            </div>
+
+            <!-- Details -->
+            <div class="details-section">
+                <div class="detail-item">
+                    <div class="detail-icon">📅</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Date</div>
+                        <div class="detail-value">Sunday, March 1st, 2026</div>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">⏰</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Time</div>
+                        <div class="detail-value">6:00 PM onwards</div>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">🏛️</div>
+                    <div class="detail-content">
+                        <div class="detail-label">Venue</div>
+                        <div class="detail-value">Details to follow</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="cta-section">
+                <button class="royal-button" onclick="showInvitation()">
+                    View Invitation
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-box">
+                    <p class="footer-text"><span class="footer-highlight">Dress Code:</span> Formal Elegance</p>
+                    <div class="footer-divider"></div>
+                    <p class="footer-text footer-highlight">RSVP Required</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="overlay" id="overlay" onclick="closeInvitation()"></div>
+
+    <div class="modal-card" id="modalCard">
+        <button class="close-btn" onclick="closeInvitation()">×</button>
+        
+        <div class="modal-icon">💎</div>
+        <h2 class="modal-title">Heartily Invited</h2>
+        <div class="modal-ornament">◆ ◇ ◆</div>
+        <p class="modal-text">You are cordially invited to celebrate</p>
+        <p class="modal-text">this distinguished milestone</p>
+        <div class="modal-divider"></div>
+        <p class="modal-text" style="font-weight: 600;">Your esteemed presence is requested</p>
+    </div>
+
+    <script>
+        // Background Music Control
+        const bgMusic = document.getElementById('bgMusic');
+        
+        // Try to autoplay music when page loads
+        window.addEventListener('load', function() {
+            bgMusic.play().catch(e => {
+                console.log('Autoplay prevented. Music will play on first interaction.');
+            });
+        });
+
+        // Play music on any user interaction
+        document.body.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+            }
+        }, { once: true });
+
+        function showInvitation() {
+            // Ensure music is playing
+            if (bgMusic.paused) {
+                bgMusic.play();
+            }
+            
+            document.getElementById('overlay').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('modalCard').classList.add('show');
+            }, 100);
+        }
+
+        function closeInvitation() {
+            document.getElementById('modalCard').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('overlay').classList.remove('show');
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeInvitation();
+            }
+        });
+    </script>
+</body>
+</html>
